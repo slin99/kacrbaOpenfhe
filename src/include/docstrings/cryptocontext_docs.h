@@ -112,7 +112,15 @@ const char* cc_EvalMultKeysGen_docs = R"pbdoc(
     :param privateKey: the private key
     :type privateKey: PrivateKey
 )pbdoc";
-
+const char* cc_EvalMultMultiple_docs= R"pbdoc(
+    Evals multiple Multiplications parallelly
+    takes two vectors of ciphertexts
+    :param cv1: the first array of ciphertexts
+    :type cv1: list
+    :param cv2: the second array of ciphertexts
+    :type cv2: list
+    :return cv: the result array of ciphertexts harmard product
+)pbdoc";
 const char* cc_EvalRotateKeyGen_docs = R"pbdoc(
     EvalRotateKeyGen generates evaluation keys for a list of indices
 

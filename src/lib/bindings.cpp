@@ -154,6 +154,10 @@ void bind_crypto_context(py::module &m)
             cc_EvalRotate_docs,
             py::arg("ciphertext"),
             py::arg("index"))
+         .def("EvalMultMultiple", &EvalMultMultiple,
+            cc_EvalMultMultiple_docs,
+            py::arg("ciphertexts"),
+            py::arg("ciphertexts"))
         .def("EvalFastRotationPrecompute", &EvalFastRotationPrecomputeWrapper,
             cc_EvalFastRotationPreCompute_docs,
             py::arg("ciphertext"))
@@ -342,7 +346,7 @@ void bind_crypto_context(py::module &m)
             cc_EvalMultMutableInPlace_docs,
             py::arg("ct1"),
             py::arg("ct2"))
-        .def("EvalSquare", &CryptoContextImpl<DCRTPoly>::EvalSquare,
+            .def("EvalSquare", &CryptoContextImpl<DCRTPoly>::EvalSquare,
             cc_EvalSquare_docs,
             py::arg("ct"))
         .def("EvalSquareMutable", &CryptoContextImpl<DCRTPoly>::EvalSquareMutable,

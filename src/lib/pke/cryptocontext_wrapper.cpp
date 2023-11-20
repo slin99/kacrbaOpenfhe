@@ -41,9 +41,14 @@ std::vector<Ciphertext<DCRTPoly>> EvalMultMultiple(CryptoContext<DCRTPoly> &self
         throw std::runtime_error("EvalMultMultiple: cv1 and cv2 must be the same size");
     }
     std::vector<Ciphertext<DCRTPoly>> result;
+    result.reserve(1+cv1.size());
+    //need to fill it otherwise we get segfaults
+    for (size_t i =0;i<cv1.size();i++){
+         result.push_back(cv1.at(i));
+    }
     #pragma omp parallel for
     for (size_t i =0;i<cv1.size();i++){
-        result.push_back(self->EvalMult(cv1.at(i),cv2.at(i)));
+         result[i] = self->EvalMult(cv1.at(i),cv2.at(i));
     }
     return result; 
 }

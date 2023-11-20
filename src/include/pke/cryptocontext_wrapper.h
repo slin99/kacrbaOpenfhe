@@ -39,7 +39,9 @@
 namespace py = pybind11;
 using namespace lbcrypto;
 using ParmType = typename DCRTPoly::Params;
-std::vector<Ciphertext<DCRTPoly>> EvalMultMultiple(CryptoContext<DCRTPoly>& self,std::vector<Ciphertext<DCRTPoly>> cv1, std::vector<Ciphertext<DCRTPoly>> cv2);
+
+std::vector<Ciphertext<DCRTPoly>> EvalDotBatch(CryptoContext<DCRTPoly>& self,std::vector<Ciphertext<DCRTPoly>> cv1, std::vector<Ciphertext<DCRTPoly>> cv2,size_t size);
+std::vector<Ciphertext<DCRTPoly>> EvalMultBatch(CryptoContext<DCRTPoly>& self,std::vector<Ciphertext<DCRTPoly>> cv1, std::vector<Ciphertext<DCRTPoly>> cv2);
 Ciphertext<DCRTPoly> EvalFastRotationPrecomputeWrapper(CryptoContext<DCRTPoly>& self,
                                                         ConstCiphertext<DCRTPoly> ciphertext);
 

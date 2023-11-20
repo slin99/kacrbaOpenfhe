@@ -112,6 +112,18 @@ const char* cc_EvalMultKeysGen_docs = R"pbdoc(
     :param privateKey: the private key
     :type privateKey: PrivateKey
 )pbdoc";
+const char* cc_EvalDotBatch_docs = R"pbdoc(
+Evals multiple dot products parallelly
+takes two vectors of ciphertexts
+:param cv1: the first array of ciphertexts
+:type cv1: list
+:param cv2: the second array of ciphertexts
+:type cv2: list
+:param size the batch size to eval the dot product on 
+:type int 
+:return cv: the result array of ciphertexts dot product
+)pbdoc";
+
 const char* cc_EvalMultMultiple_docs= R"pbdoc(
     Evals multiple Multiplications parallelly
     takes two vectors of ciphertexts

@@ -36,7 +36,23 @@
 using namespace lbcrypto;
 namespace py = pybind11;
 
-std::vector<Ciphertext<DCRTPoly>> EvalMultMultiple(CryptoContext<DCRTPoly> &self, std::vector<Ciphertext<DCRTPoly>> cv1,std::vector<Ciphertext<DCRTPoly>> cv2) {
+std::vector<Ciphertext<DCRTPoly>> EvalDotBatch(CryptoContext<DCRTPoly> &self, std::vector<Ciphertext<DCRTPoly>> cv1, std::vector<Ciphertext<DCRTPoly>> cv2,size_t size){
+    if(cv1.size() != cv2.size()){
+        throw std::runtime_error("EvalDotBatch: cv1 and cv2 must be the same size");
+    }
+    std::vector<Ciphertext<DCRTPoly>> result;
+    result.reserve(1+cv1.size());
+    //fill it bc segfaults
+    for (size_t i =0;i<cv1.size();i++){
+         result.push_back(cv1.at(i));
+    }
+    #pragma omp parallel for
+    for (size_t i =0;i<cv1.size();i++){
+         result[i] = self->EvalInnerProduct(cv1.at(i),cv2.at(i),size);
+    }
+    return result;
+}
+std::vector<Ciphertext<DCRTPoly>> EvalMultBatch(CryptoContext<DCRTPoly> &self, std::vector<Ciphertext<DCRTPoly>> cv1,std::vector<Ciphertext<DCRTPoly>> cv2) {
     if (cv1.size() != cv2.size()) {
         throw std::runtime_error("EvalMultMultiple: cv1 and cv2 must be the same size");
     }

@@ -154,7 +154,12 @@ void bind_crypto_context(py::module &m)
             cc_EvalRotate_docs,
             py::arg("ciphertext"),
             py::arg("index"))
-         .def("EvalMultMultiple", &EvalMultMultiple,
+        .def("EvalDotBatch",&EvalDotBatch,
+            cc_EvalDotBatch_docs,
+            py::arg("ciphertexts"),
+            py::arg("ciphertexts"),
+            py::arg("size")) 
+        .def("EvalMultBatch", &EvalMultBatch,
             cc_EvalMultMultiple_docs,
             py::arg("ciphertexts"),
             py::arg("ciphertexts"))
